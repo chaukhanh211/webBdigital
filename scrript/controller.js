@@ -1,24 +1,46 @@
 $(document).ready(
     function(){
-        $('#thumbnail_slider').owlCarousel({
-            items:1,
-            merge:true,
-            loop:true,
-            margin:10,
-            video:true,
-            lazyLoad:true,
-            center:true,
-            responsive:{
-                480:{
-                    items:2
-                },
-                600:{
-                    items:4
-                }
-            }
-        })
-    }
+                var owl = $('#thumbnail_slider');
+                owl.owlCarousel({
+                    loop:true,
+                    nav:true,
+                    center:true,
+                    navigation : true,
+                    navigationText: ["◀ Left <strong>arrow</strong>","Right <strong>arrow</strong> ▶"],
+                    margin:10,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        600:{
+                            items:3
+                        },            
+                        960:{
+                            items:5
+                        },
+                        1200:{
+                            items:6
+                        }
+                    }
+                });
+                owl.on('mousewheel', '.owl-stage', function (e) {
+                    if (e.deltaY>0) {
+                        owl.trigger('next.owl');
+                    } else {
+                        owl.trigger('prev.owl');
+                    }
+                    e.preventDefault();
+                });
+
+                $('.owl-carousel').owlCarousel({
+                    items:1,
+                    lazyLoad:true,
+                    loop:true,
+                    margin:10
+                });
+        }
 );
+
 
 
 
@@ -28,60 +50,13 @@ const app = {
         {
           name: "Show reel 2019",
           path: '<iframe src="https://www.youtube.com/embed/2aU6aOVzz18" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-          image: "assets/imgThumb/b_showreel_2019_2020.jpg"
+          image: "assets/images/b_showreel_2019_2020.png"
         },
         {
           name: "Show reel 2019",
           path: '<iframe src="https://www.youtube.com/embed/fExd3YhgWbQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-          image: "assets/imgThumb/show_ree_2021_2022l.jpg"
-        },
-        // {
-        //   name: "Huyền Thoại RUNETERRA",
-        //   path: '<iframe  src="https://www.youtube.com/embed/EsLCWt0A8ww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/Huyen-thoai-RUNETERRA.jpg"
-        // },
-        // {
-        //   name: "NƯỚC TĂNG LỰC NUMBER1 CHANH & DÂU",
-        //   path: '<iframe  src="https://www.youtube.com/embed/qQi_zn_zOJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/number1.jpg"
-        // },
-        // {
-        //   name: "Tuyết Ưng VNG",
-        //   path: '<iframe  src="https://www.youtube.com/embed/iAz5VOqRfNw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/tuyetung.jpg"
-        // },
-        // {
-        //   name: "TVC KR",
-        //   path: '<iframe  src="https://www.youtube.com/embed/YGcgghFRpoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/tvc-kr.jpg"
-        // },
-        // {
-        //   name: "showreel 2019 - 2020",
-        //   path: '<iframe  src="https://www.youtube.com/embed/4iM9tVGSyrU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/showreel.jpg"
-        // },
-        // {
-        //   name: "Rigging Training",
-        //   path: '<iframe  src="https://www.youtube.com/embed/sK81mj_tFLs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/Riggingtraining.jpg"
-        // },
-        // {
-        //   name: "Animation Training",
-        //   path: '<iframe  src="https://www.youtube.com/embed/ZZntlpXbLvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/animationtraining.jpg"
-        // },
-        // {
-        //   name: "Showreel VFX 2018",
-        //   path: '<iframe  src="https://www.youtube.com/embed/cUQW2Kl6DrY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/showreel2018.jpg"
-        // },
-        // {
-        //   name: "[한화그룹 디지털 광고] 지속가능한 친환경기술-탄소 줄이는 기술",
-        //   path: '<iframe  src="https://www.youtube.com/embed/sYlwC4OHymU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        //   image: "imgThumb/mq1.jpg"
-        // },
-        
-        
+          image: "assets/images/show_ree_2021_2022.png"
+        }
     ],
     // effect: [
     //   "fade-left",
@@ -100,8 +75,10 @@ const app = {
     render: function() {
         const htmls = this.videos.map(video => {
             return `
-            <div class="item-video" data-merge="3"> <img alt='${video.path}'  
-            src="${video.image}"></div>
+            <div class="item-video" data-merge="3"> <img class ="h-100" alt='${video.path}'  
+            src="${video.image}">
+            <div class="play-button"></div>
+            </div>
             `
         })
        
